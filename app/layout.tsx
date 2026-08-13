@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo-mark.svg",
   },
+  other: {
+    "google-site-verification": "fRD9JFm6BkfePQ-Zu-JzQXq4EdzlR9lzJtyw_XmSjtw",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
