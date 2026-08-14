@@ -1,6 +1,34 @@
+"use client";
+
 import Image from "next/image";
 
-const trustedBrands = ["Lavish Eventzz", "Shreem Marmo", "Nakshatra Namaha Creations"];
+const trustedBrands = [
+  {
+    name: "Lavish Eventzz",
+    logo: "/logos/Lavish_Logo.webp",
+    alt: "Lavish Eventzz logo"
+  },
+  {
+    name: "Shreem Marmo",
+    logo: "/logos/Shreem Marmo Logo.webp",
+    alt: "Shreem Marmo logo"
+  },
+  {
+    name: "Nakshatra Namaha Creations",
+    logo: "/logos/NNC Logo.webp",
+    alt: "Nakshatra Namaha Creations logo"
+  },
+  {
+    name: "Make My Document",
+    logo: "/logos/Make My Document Logo.webp",
+    alt: "Make My Document logo"
+  },
+  {
+    name: "Success Edge",
+    logo: "/logos/Success Edge Logo.webp",
+    alt: "Success Edge logo"
+  }
+];
 
 const aboutStats = [
   { value: "3+", label: "Years of SEO Experience" },
@@ -61,13 +89,6 @@ const approachSteps = [
     title: "Evolve",
     text: "Continuously adapt the strategy as search engines, user behavior, and AI-powered search evolve.",
   },
-];
-
-const resultsStats = [
-  { value: "35+", label: "Keywords Ranking on the First Page" },
-  { value: "3+", label: "Years of Hands-On SEO Experience" },
-  { value: "SEO + AEO + GEO", label: "Focused Search Strategy" },
-  { value: "National & International", label: "Business Experience" },
 ];
 
 const reasons = [
@@ -200,6 +221,56 @@ function ArrowRight() {
   );
 }
 
+function BrandsCarousel() {
+  // Duplicate brands array for seamless infinite scrolling
+  const duplicatedBrands = [...trustedBrands, ...trustedBrands];
+
+  return (
+    <>
+      <style>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .brands-scroll {
+          animation: scroll 30s linear infinite;
+          display: flex;
+          width: 200%;
+        }
+
+        .brands-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
+      <div 
+        className="relative w-full overflow-hidden"
+      >
+        <div className="brands-scroll">
+          {duplicatedBrands.map((brand, index) => (
+            <div key={`${brand.name}-${index}`} className="flex-shrink-0 px-3 w-1/5">
+              <div className="rounded-2xl border border-black/10 bg-white px-6 py-8 flex items-center justify-center h-[180px]">
+                <Image
+                  src={brand.logo}
+                  alt={brand.alt}
+                  width={160}
+                  height={120}
+                  className="max-w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-[#171717]">
@@ -269,18 +340,14 @@ export default function Home() {
       <section className="border-t border-black/10 bg-[#f6f6f6] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1400px]">
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-            <h3 className="text-2xl font-bold tracking-[-0.04em] text-[#171717] sm:text-3xl">Trusted by Businesses</h3>
+            <h3 className="text-2xl font-bold tracking-[-0.04em] text-[#171717] sm:text-3xl">Worked with Businesses</h3>
             <p className="max-w-xl text-base leading-7 text-zinc-700">
               Helping brands strengthen their search presence.
             </p>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {trustedBrands.map((brand) => (
-              <div key={brand} className="rounded-2xl border border-black/10 bg-white px-5 py-6 text-center text-xl font-semibold text-[#171717] sm:text-2xl">
-                {brand}
-              </div>
-            ))}
+          <div className="mt-8">
+            <BrandsCarousel />
           </div>
         </div>
       </section>
@@ -361,36 +428,6 @@ export default function Home() {
                 <p className="mt-4 text-sm leading-7 text-zinc-700">{step.text}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-black/10 bg-[#f7f7f7] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-[1400px]">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">Results That Speak</p>
-          <h3 className="mt-4 text-3xl font-bold tracking-[-0.05em] text-[#171717] sm:text-5xl">
-            From Search Visibility to Real Growth
-          </h3>
-          <p className="mt-6 max-w-4xl text-base leading-8 text-zinc-700 sm:text-lg">
-            SEO is more than getting a website to rank. It is about getting the <span className="font-semibold text-[#171717]">right pages in front of the right people at the right stage of their search journey.</span>
-          </p>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {resultsStats.map((stat) => (
-              <div key={stat.label} className="rounded-[1.5rem] border border-black/10 bg-white p-5 text-[#171717]">
-                <div className="text-3xl font-black tracking-[-0.05em] text-[#171717]">{stat.value}</div>
-                <p className="mt-4 text-base leading-7 text-zinc-700">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10">
-            <a
-              href="tel:+916362441641"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#171717] px-6 py-3.5 text-base font-bold text-white transition hover:bg-black"
-            >
-              View Case Studies <ArrowRight />
-            </a>
           </div>
         </div>
       </section>
